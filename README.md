@@ -1,2 +1,2 @@
 # Juicy-Jam
-Used for the 2021 Juicy Jam #1
+Used for the Juicy Jam #1 Game Jam
