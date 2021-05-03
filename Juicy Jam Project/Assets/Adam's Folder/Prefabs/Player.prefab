@@ -123,6 +123,9 @@ MonoBehaviour:
   dashSpeed: 30
   dashTime: 0.15
   distanceBetweenImages: 3.7
+  timeSinceLastStaminaUpdate: 0
+  restTime: 1.5
+  stamina: 3
   dashing: 0
 --- !u!60 &5938454902389623303
 PolygonCollider2D:
