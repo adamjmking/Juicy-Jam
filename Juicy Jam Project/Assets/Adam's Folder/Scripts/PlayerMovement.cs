@@ -8,42 +8,93 @@ public class PlayerMovement : MonoBehaviour
     public float playerSpeed;
     public float dashSpeed;
     public float dashTime;
-    [SerializeField] private bool dashing;
+    public float distanceBetweenImages;
+    public float timeSinceLastStaminaUpdate;
+    public float restTime = 1.5f;
+    public int stamina = 3;
+    public bool dashing;
 
     //Components
     Rigidbody2D rb;
 
     //Vectors
-    Vector2 mInput, dashInput;
+    Vector2 moveInput;
+    Vector2 dashDir;
+    Vector3 lastImagePos;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
-        if (!dashing)
+        if (!dashing) //Move normally if we aren't dashing
         {
-            mInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-            mInput.Normalize();
+            moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            moveInput.Normalize();
+
+            timeSinceLastStaminaUpdate += Time.deltaTime;
         }
 
+        dashDir = moveInput; //Get the direction we were moving in
+        if (Input.GetKeyDown(KeyCode.Space) && !dashing && stamina > 0) //If we haven't dashed and we press the spacebar
+        {
+            dashing = true;
+            stamina -= 1;
+            timeSinceLastStaminaUpdate = 0f;
+            AfterImagePool.Instance.GetFromPool(); //Creates one after image
+            lastImagePos = transform.position; //Set's the last image position to the current position
+
+            Invoke(nameof(ResetDash), dashTime); //Set dashing to false after some time
+        }
+
+        if (dashing)
+        {
+            MakeAfterImages();
+        }
+
+        UpdateStamina();
     }
 
-    private void FixedUpdate()
+    private void FixedUpdate() //For physics calculations
     {
-        rb.velocity = mInput * playerSpeed;
+        if (!dashing)
+        {
+            rb.velocity = moveInput * playerSpeed; //Moves the player
+        }
+        else
+        {
+            rb.velocity = dashDir * dashSpeed;
+        }
     }
 
-    private void ResetDash()
+    //Regain stamina on a set interval
+    void UpdateStamina()
+    {
+        if (timeSinceLastStaminaUpdate > restTime)
+        {
+            stamina++;
+            if (stamina > 3)
+            {
+                stamina = 3;
+            }
+
+            timeSinceLastStaminaUpdate = 0f;
+        }
+    }
+
+    void MakeAfterImages()
+    {
+        if (Vector3.SqrMagnitude(transform.position - lastImagePos) > distanceBetweenImages)
+        {
+            AfterImagePool.Instance.GetFromPool();
+            lastImagePos = transform.position;
+        }
+    }
+
+    void ResetDash()
     {
         dashing = false;
     }
