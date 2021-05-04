@@ -25,6 +25,7 @@ public class PlayerHealthHandler : MonoBehaviour
     private void HealthChanged(object sender, EventArgs args)
     {
         if (healthSystem.GetHealth() <= 0) Die();
+        GameObject.Find("UICanvas").GetComponent<HealthbarScript>().HealthChanged();
     }
 
     private void Die()

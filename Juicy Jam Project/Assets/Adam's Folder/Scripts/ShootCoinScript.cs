@@ -35,7 +35,7 @@ public class ShootCoinScript : MonoBehaviour
     {
         for (int i = 1; i <= coinCount; i++)
         {
-            Instantiate(coin, transform.position, Quaternion.Euler(0f, 0f, 360 / i));
+            Instantiate(coin, transform.position, Quaternion.Euler(0f, 0f, Random.Range(1,360)));
         }
     }
 

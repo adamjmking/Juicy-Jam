@@ -24,7 +24,6 @@ public class EnemyHealthHandler : MonoBehaviour
 
     private void HealthChanged(object sender, EventArgs args)
     {
-        Debug.Log("enemyhealth: " + healthSystem.GetHealth());
         if (healthSystem.GetHealth() <= 0) Die();
     }
 

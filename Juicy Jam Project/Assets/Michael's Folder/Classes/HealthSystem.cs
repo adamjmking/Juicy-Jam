@@ -48,4 +48,22 @@ public class HealthSystem
     {
         return health / maxHealth;
     }
+
+    public void SetMaxHealth(float health)
+    {
+        maxHealth = health;
+    }
+
+    public float GetMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    public void SetHealth(float newHealth)
+    {
+        health = newHealth;
+        if (health < 0) health = 0;
+        if (health > maxHealth) health = maxHealth;
+        OnHealthChanged(this, EventArgs.Empty);
+    }
 }
