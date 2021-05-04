@@ -25,6 +25,7 @@ public class SlotmachineHealthHandler : MonoBehaviour
     private void HealthChanged(object sender, EventArgs args)
     {
         if (healthSystem.GetHealth() <= 0) Die();
+        GameObject.Find("UICanvas").GetComponent<HealthbarScript>().SlotmachineHealthChanged();
     }
 
     private void Die()

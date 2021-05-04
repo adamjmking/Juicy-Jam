@@ -40,7 +40,7 @@ public class AttackHitboxBehavior : MonoBehaviour
         //Damage enemies
         foreach (Collider2D enemy in hitEnemies)
         {
-            if(enemy.attachedRigidbody.gameObject.tag == "Enemy")
+            if(enemy.attachedRigidbody != null && enemy.attachedRigidbody.gameObject.tag.Equals("Enemy"))
             {
                 if (!HitEnemies.Contains(enemy.gameObject.GetInstanceID()))
                 {

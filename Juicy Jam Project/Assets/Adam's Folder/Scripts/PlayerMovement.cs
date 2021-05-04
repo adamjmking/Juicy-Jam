@@ -14,14 +14,23 @@ public class PlayerMovement : MonoBehaviour
     public int stamina = 3;
     public int maxStamina = 3;
     public bool dashing;
+    public Vector3 spawnpoint;
 
     //Components
     Rigidbody2D rb;
+    Transform playerTransform;
 
     //Vectors
     Vector2 moveInput;
     Vector2 dashDir;
     Vector3 lastImagePos;
+
+    private void Start()
+    {
+        playerTransform = GetComponent<Transform>();
+        spawnpoint = playerTransform.position;
+        Powerups.player = gameObject;
+    }
 
     private void Awake()
     {
@@ -106,5 +115,10 @@ public class PlayerMovement : MonoBehaviour
     void ResetDash()
     {
         dashing = false;
+    }
+
+    public void ReturnToSpawn()
+    {
+        playerTransform.position = spawnpoint; 
     }
 }
