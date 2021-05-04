@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 5938454902389623321}
   - component: {fileID: 5938454902389623322}
   - component: {fileID: 5938454902389623323}
-  - component: {fileID: 5938454902389623303}
-  - component: {fileID: 5938454902389623302}
+  - component: {fileID: 2301445167371231888}
+  - component: {fileID: 4487516541623987333}
+  - component: {fileID: 3175545247926432053}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 5938454902389623324}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 1911982495
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fd8ede61f4ed5cb4c80696025d21d6aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -127,73 +128,35 @@ MonoBehaviour:
   restTime: 1.5
   stamina: 3
   dashing: 0
---- !u!60 &5938454902389623303
-PolygonCollider2D:
+--- !u!114 &2301445167371231888
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5938454902389623324}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.296875, y: -0.4140625}
-      - {x: 0.3984375, y: -0.3125}
-      - {x: 0.43359375, y: -0.26171875}
-      - {x: 0.46875, y: -0.1875}
-      - {x: 0.48828125, y: -0.14453125}
-      - {x: 0.5, y: -0.07421875}
-      - {x: 0.5, y: 0.08203125}
-      - {x: 0.4921875, y: 0.11328125}
-      - {x: 0.46875, y: 0.1953125}
-      - {x: 0.42578125, y: 0.2734375}
-      - {x: 0.3984375, y: 0.3125}
-      - {x: 0.33984375, y: 0.375}
-      - {x: 0.26171875, y: 0.43359375}
-      - {x: 0.17578125, y: 0.4765625}
-      - {x: 0.1328125, y: 0.4921875}
-      - {x: 0.0859375, y: 0.5}
-      - {x: -0.07421875, y: 0.5}
-      - {x: -0.11328125, y: 0.49609375}
-      - {x: -0.1953125, y: 0.46875}
-      - {x: -0.2734375, y: 0.4296875}
-      - {x: -0.33984375, y: 0.375}
-      - {x: -0.37890625, y: 0.33984375}
-      - {x: -0.43359375, y: 0.26171875}
-      - {x: -0.4765625, y: 0.1796875}
-      - {x: -0.5, y: 0.09765625}
-      - {x: -0.5, y: -0.08203125}
-      - {x: -0.484375, y: -0.14453125}
-      - {x: -0.46484375, y: -0.1953125}
-      - {x: -0.42578125, y: -0.2734375}
-      - {x: -0.3984375, y: -0.3125}
-      - {x: -0.33984375, y: -0.37890625}
-      - {x: -0.26171875, y: -0.43359375}
-      - {x: -0.1953125, y: -0.46484375}
-      - {x: -0.15625, y: -0.484375}
-      - {x: -0.09375, y: -0.49609375}
-      - {x: -0.078125, y: -0.5}
-      - {x: 0.0703125, y: -0.5}
-      - {x: 0.09375, y: -0.49609375}
-      - {x: 0.14453125, y: -0.484375}
-      - {x: 0.19921875, y: -0.46875}
---- !u!58 &5938454902389623302
-CircleCollider2D:
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb074b6166bd2814da25b3e6b4725bdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackCooldown: 0.25
+  attackHitbox: {fileID: 5901971689077506679, guid: 76be8c975d1889c4797def4687f238e9, type: 3}
+--- !u!114 &4487516541623987333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5938454902389623324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c048112774e1b6a4e8e3c8b581eefa86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+--- !u!70 &3175545247926432053
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -206,5 +169,5 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 1.71, y: 3.5}
+  m_Direction: 0

@@ -55,7 +55,7 @@ public class ChipEnemyScript : MonoBehaviour
             {
                 normalizedVectorToTarget = (slotmachineTransform.position - chipTransform.position).normalized;
             }
-            chipRigidBody.velocity = chipSpeed * normalizedVectorToTarget;
+            chipRigidBody.velocity = chipSpeed * Powerups.enemyMoveSpeedMult * normalizedVectorToTarget;
         }
         else
         {
@@ -66,7 +66,7 @@ public class ChipEnemyScript : MonoBehaviour
         if((DistanceToPlayer < seekedDistanceToTarget || DistanceToSlotmachine < seekedDistanceToTarget) && !shootingInvoked)
         {
             shootingInvoked = true; 
-            InvokeRepeating(((Action)ShootProjectile).Method.Name, coolDownUntilStartShooting, shootCooldown);
+            InvokeRepeating(((Action)ShootProjectile).Method.Name, coolDownUntilStartShooting, shootCooldown / Powerups.projectileRateOfFireMult);
         }
         if(DistanceToPlayer > seekedDistanceToTarget && DistanceToSlotmachine > seekedDistanceToTarget  && shootingInvoked)
         {
@@ -91,8 +91,9 @@ public class ChipEnemyScript : MonoBehaviour
         }
 
         GameObject newProjectile = Instantiate(chipProjectile);
+        newProjectile.transform.localScale = new Vector2(1, 1) * Powerups.projectileSizeMult;
         Rigidbody2D projectileRigidbody = newProjectile.GetComponent<Rigidbody2D>();
         projectileRigidbody.transform.position = chipTransform.position;
-        projectileRigidbody.AddForce(projectileSpeed * normalizedVectorToTarget, ForceMode2D.Impulse);
+        projectileRigidbody.AddForce(projectileSpeed * Powerups.projectileSpeedMult * normalizedVectorToTarget, ForceMode2D.Impulse);
     }
 }

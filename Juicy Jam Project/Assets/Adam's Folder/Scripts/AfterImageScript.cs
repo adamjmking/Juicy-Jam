@@ -18,6 +18,9 @@ public class AfterImageScript : MonoBehaviour
     [SerializeField] private float activeTime = 0.1f;
     private float timeActivated;
 
+    //Vectors
+    private Vector2 imageScale = new Vector2 (0.5f, 0.5f);
+
     private void OnEnable()
     {
         //Get components
@@ -30,6 +33,7 @@ public class AfterImageScript : MonoBehaviour
         SR.sprite = playerSR.sprite;
         transform.position = player.position;
         transform.rotation = player.rotation;
+        transform.localScale = imageScale;
         timeActivated = Time.time;
     }
 

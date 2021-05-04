@@ -35,7 +35,7 @@ public class AttackHitboxBehavior : MonoBehaviour
         attackHitboxTransform.position = player.transform.position + relativePosToPlayer;
 
         //Detect enemies
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackHitboxTransform.position, 0.5f);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackHitboxTransform.position, 0.5f * Powerups.attackRangeMult);
 
         //Damage enemies
         foreach (Collider2D enemy in hitEnemies)
@@ -45,9 +45,9 @@ public class AttackHitboxBehavior : MonoBehaviour
                 if (!HitEnemies.Contains(enemy.gameObject.GetInstanceID()))
                 {
                     HitEnemies.Add(enemy.gameObject.GetInstanceID());
-                    enemy.GetComponent<EnemyHealthHandler>().healthSystem.Damage(attackDamage);
+                    enemy.GetComponent<EnemyHealthHandler>().healthSystem.Damage(attackDamage * Powerups.damageMult);
                 }
-            };
+            }
         }
     }
 

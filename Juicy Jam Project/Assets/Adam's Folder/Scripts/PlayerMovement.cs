@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public float timeSinceLastStaminaUpdate;
     public float restTime = 1.5f;
     public int stamina = 3;
+    public int maxStamina = 3;
     public bool dashing;
 
     //Components
@@ -41,13 +42,16 @@ public class PlayerMovement : MonoBehaviour
         dashDir = moveInput; //Get the direction we were moving in
         if (Input.GetKeyDown(KeyCode.Space) && !dashing && stamina > 0) //If we haven't dashed and we press the spacebar
         {
-            dashing = true;
-            stamina -= 1;
-            timeSinceLastStaminaUpdate = 0f;
-            AfterImagePool.Instance.GetFromPool(); //Creates one after image
-            lastImagePos = transform.position; //Set's the last image position to the current position
+            if (dashDir != Vector2.zero)
+            {
+                dashing = true;
+                stamina -= 1;
+                timeSinceLastStaminaUpdate = 0f;
+                AfterImagePool.Instance.GetFromPool(); //Creates one after image
+                lastImagePos = transform.position; //Set's the last image position to the current position
 
-            Invoke(nameof(ResetDash), dashTime); //Set dashing to false after some time
+                Invoke(nameof(ResetDash), dashTime); //Set dashing to false after some time
+            }
         }
 
         if (dashing)
@@ -62,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!dashing)
         {
-            rb.velocity = moveInput * playerSpeed; //Moves the player
+            rb.velocity = moveInput * playerSpeed * Powerups.moveSpeedMult; //Moves the player
         }
         else
         {
@@ -73,16 +77,21 @@ public class PlayerMovement : MonoBehaviour
     //Regain stamina on a set interval
     void UpdateStamina()
     {
-        if (timeSinceLastStaminaUpdate > restTime)
+        if (timeSinceLastStaminaUpdate > restTime / Powerups.staminaRegenMult)
         {
             stamina++;
-            if (stamina > 3)
+            if (stamina > maxStamina)
             {
-                stamina = 3;
+                stamina = maxStamina;
             }
 
             timeSinceLastStaminaUpdate = 0f;
         }
+    }
+
+    public void UpdateMaxStamina(int extraStam)
+    {
+        maxStamina += extraStam;
     }
 
     void MakeAfterImages()

@@ -4,17 +4,26 @@ using UnityEngine;
 
 public class WheelResultCalculator<T>
 {
-    public T getResult(T[] optionList, float spinResult)
+    //public T getResult(T[] optionList, float spinResult)
+    //{
+    //    if (spinResult < 0)
+    //    {
+    //        spinResult = 360 + spinResult;
+    //    }
+
+    //    float sectionLength = 360 / optionList.Length;
+    //    int indexOfOption = (int)(spinResult / sectionLength);
+    //    return optionList[indexOfOption];
+
+    //}
+
+/*    int GetResult(int count, float angle)
     {
-        if (spinResult < 0)
+        if (angle < 0)
         {
-            spinResult = 360 + spinResult;
+            angle += 360f;
         }
 
-        float sectionLength = 360 / optionList.Length;
-        int indexOfOption = (int)(spinResult / sectionLength);
-        return optionList[indexOfOption];
-
-    }
-
+        return (int)(angle/(360f/count)) + 1;
+    }*/
 }
