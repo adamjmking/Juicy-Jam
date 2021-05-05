@@ -25,6 +25,6 @@ public class CoinBehavior : MonoBehaviour
         {
             collision.collider.GetComponent<EnemyHealthHandler>().healthSystem.Damage(coinDamage);
         }
-        Destroy(gameObject);
+        if (!collision.collider.CompareTag("Player")) Destroy(gameObject);
     }
 }

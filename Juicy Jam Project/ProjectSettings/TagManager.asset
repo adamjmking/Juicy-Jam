@@ -17,7 +17,7 @@ TagManager:
   - EnemyProjectile
   - Slotmachine
   - Coin
-  - 
+  - Obstacle
   - 
   - 
   - 
@@ -45,4 +45,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 1911982495
+    locked: 0
+  - name: Pointer
+    uniqueID: 3736188277
     locked: 0

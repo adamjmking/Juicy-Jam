@@ -14,15 +14,18 @@ public class PlayerMovement : MonoBehaviour
     public int stamina = 3;
     public int maxStamina = 3;
     public bool dashing;
+    public bool ableToMove;
     public Vector3 spawnpoint;
 
     //Components
     Rigidbody2D rb;
     Transform playerTransform;
+    Animator animator;
 
     //Vectors
     Vector2 moveInput;
     Vector2 dashDir;
+    Vector2 knockbackVelocity;
     Vector3 lastImagePos;
 
     private void Start()
@@ -30,11 +33,13 @@ public class PlayerMovement : MonoBehaviour
         playerTransform = GetComponent<Transform>();
         spawnpoint = playerTransform.position;
         Powerups.player = gameObject;
+        ableToMove = true;
     }
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -66,6 +71,30 @@ public class PlayerMovement : MonoBehaviour
         if (dashing)
         {
             MakeAfterImages();
+            //Update sprites
+            if (dashDir.x < 0)
+            {
+                animator.SetFloat("dashDir", -0.5f);
+            }
+            else if (dashDir.x > 0)
+            {
+                animator.SetFloat("dashDir", 0.5f);
+            }
+            else
+            {
+                if (dashDir.y > 0)
+                {
+                    animator.SetFloat("dashDir", 0.5f);
+                }
+                else
+                {
+                    animator.SetFloat("dashDir", -0.5f);
+                }
+            }
+        }
+        else
+        {
+            animator.SetFloat("dashDir", 0);
         }
 
         UpdateStamina();
@@ -73,14 +102,27 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate() //For physics calculations
     {
-        if (!dashing)
+        if (ableToMove)
         {
-            rb.velocity = moveInput * playerSpeed * Powerups.moveSpeedMult; //Moves the player
+            if (!dashing)
+            {
+                rb.velocity = moveInput * playerSpeed * Powerups.moveSpeedMult; //Moves the player
+            }
+            else
+            {
+                rb.velocity = dashDir * dashSpeed;
+            }
         }
-        else
+        if (knockbackVelocity != Vector2.zero)
         {
-            rb.velocity = dashDir * dashSpeed;
+            rb.velocity += knockbackVelocity;
+            knockbackVelocity = Vector2.MoveTowards(knockbackVelocity, Vector2.zero, (6f * Powerups.knockbackResistance) * Time.fixedDeltaTime);
         }
+    }
+
+    public void AddKnockback(Vector2 v)
+    {
+        knockbackVelocity += 5*v;
     }
 
     //Regain stamina on a set interval
@@ -120,5 +162,10 @@ public class PlayerMovement : MonoBehaviour
     public void ReturnToSpawn()
     {
         playerTransform.position = spawnpoint; 
+    }
+
+    public void OnDestroy()
+    {
+        Powerups.player = null;
     }
 }

@@ -17,10 +17,15 @@ public class SpawnerManagerScript : MonoBehaviour
     //GameObjects
     [SerializeField] private GameObject[] spawnerList;
 
+    private void Awake()
+    {
+        Powerups.ResetPowerupValues();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        Powerups.ResetPowerupValues();
     }
 
     // Update is called once per frame

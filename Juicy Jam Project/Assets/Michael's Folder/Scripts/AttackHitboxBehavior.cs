@@ -40,12 +40,13 @@ public class AttackHitboxBehavior : MonoBehaviour
         //Damage enemies
         foreach (Collider2D enemy in hitEnemies)
         {
-            if(enemy.attachedRigidbody != null && enemy.attachedRigidbody.gameObject.tag.Equals("Enemy"))
+            if (enemy.attachedRigidbody != null && enemy.attachedRigidbody.gameObject.tag.Equals("Enemy"))
             {
                 if (!HitEnemies.Contains(enemy.gameObject.GetInstanceID()))
                 {
                     HitEnemies.Add(enemy.gameObject.GetInstanceID());
                     enemy.GetComponent<EnemyHealthHandler>().healthSystem.Damage(attackDamage * Powerups.damageMult);
+                    enemy.GetComponent<EnemyHealthHandler>().Knockback(gameObject);
                 }
             }
         }

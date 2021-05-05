@@ -117,7 +117,7 @@ public class WheelBehavior : MonoBehaviour
             sfx.PlaySound(2); //Plays wheel spin sfx
             wheelRigidbody.AddTorque(-50);
             CreateOptions();
-            Invoke(nameof(StartSpin), 2.5f);
+            Invoke(nameof(StartSpin), 0f);
         }
     }
 
@@ -215,7 +215,7 @@ public class WheelBehavior : MonoBehaviour
 
         tier3EPowerUps[0] = new PowerUp("faster attack speed", new Action(Powerups.ActivateEFasterAttackSpeed), false);
         tier3EPowerUps[1] = new PowerUp("more dice summoned", new Action(Powerups.ActivateEMoreDiceSummoned), false);
-        tier3EPowerUps[2] = new PowerUp("pokerchips homing", new Action(Powerups.ActivateEPokerChipsHoming), false);
+        tier3EPowerUps[2] = new PowerUp("more pokerchips damage", new Action(Powerups.ActivateEPokerChipsDamage), false);
     }
 
     private void CreateOptions()

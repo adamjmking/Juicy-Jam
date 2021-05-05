@@ -2,18 +2,25 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SlotmachineHealthHandler : MonoBehaviour
 {
     //Variables
     public float health;
     public HealthSystem healthSystem { get; set; }
+    public static SlotmachineHealthHandler SlotmachineInstance;
+
+    private void Awake()
+    {
+        SlotmachineInstance = this;
+        healthSystem = new HealthSystem(health);
+        healthSystem.OnHealthChanged += HealthChanged;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        healthSystem = new HealthSystem(health);
-        healthSystem.OnHealthChanged += HealthChanged;
     }
 
     // Update is called once per frame
@@ -30,6 +37,11 @@ public class SlotmachineHealthHandler : MonoBehaviour
 
     private void Die()
     {
-        //slotmachine gets destroyed
+        SceneManager.LoadScene("DeathScene");
+    }
+
+    private void OnDestroy()
+    {
+        SlotmachineInstance = null;
     }
 }

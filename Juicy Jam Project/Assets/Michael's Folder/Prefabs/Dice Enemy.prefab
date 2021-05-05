@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 7437307531228406581}
   - component: {fileID: 7437307531228406579}
   - component: {fileID: 7437307531228406578}
+  - component: {fileID: 3544823080031952456}
+  - component: {fileID: 854789136136785998}
   m_Layer: 6
   m_Name: Dice Enemy
   m_TagString: Enemy
@@ -99,7 +101,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 2
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -198,3 +200,47 @@ PolygonCollider2D:
       - {x: 0.42999998, y: -0.91499996}
       - {x: 1.0699999, y: -0.625}
       - {x: 1.1899999, y: -0.525}
+--- !u!114 &3544823080031952456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7437307531228406577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c8f1015e787dd545be78d43b6fb8ff6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 400
+  nextWayPointDistance: 1
+  playerChaseDistance: 40
+  babyDice: {fileID: 1111547662245835476, guid: 1f6cf19d7baf3cf4a9432759011ce35a, type: 3}
+--- !u!114 &854789136136785998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7437307531228406577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1

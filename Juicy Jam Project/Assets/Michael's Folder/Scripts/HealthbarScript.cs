@@ -5,22 +5,13 @@ using UnityEngine;
 
 public class HealthbarScript : MonoBehaviour
 {
-    PlayerHealthHandler playerHealth;
-    SlotmachineHealthHandler slotmachineHealth;
-    PlayerMovement playerMovement;
-    
+    [SerializeField] PlayerHealthHandler playerHealth;
+    [SerializeField] SlotmachineHealthHandler slotmachineHealth;
+    [SerializeField] PlayerMovement playerMovement;
 
     public GameObject healthBarForeground;
     public GameObject slotmachineHealthForeground;
     public GameObject staminaBarForeground;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        playerHealth = GameObject.Find("Player").GetComponent<PlayerHealthHandler>();
-        slotmachineHealth = GameObject.Find("Slotmachine").GetComponent<SlotmachineHealthHandler>();
-        playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
-    }
 
     // Update is called once per frame
     void Update()
