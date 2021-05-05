@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public bool dashing;
     public bool ableToMove;
     public Vector3 spawnpoint;
+    public bool moving;
 
     //Components
     Rigidbody2D rb;
@@ -28,18 +29,31 @@ public class PlayerMovement : MonoBehaviour
     Vector2 knockbackVelocity;
     Vector3 lastImagePos;
 
+    //Scripts
+    public SFXManager sfx;
+
     private void Start()
     {
         playerTransform = GetComponent<Transform>();
         spawnpoint = playerTransform.position;
         Powerups.player = gameObject;
         ableToMove = true;
+        sfx = FindObjectOfType<SFXManager>();
+        InvokeRepeating(nameof(PlayFS), 0, 0.3f);
     }
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+    }
+
+    private void PlayFS()
+    {
+        if (moving)
+        {
+            sfx.FootStepsSound();
+        }
     }
 
     // Update is called once per frame
@@ -51,6 +65,14 @@ public class PlayerMovement : MonoBehaviour
             moveInput.Normalize();
 
             timeSinceLastStaminaUpdate += Time.deltaTime;
+            if (moveInput.magnitude > 0)
+            {
+                moving = true;
+            }
+            else
+            {
+                moving = false;
+            }
         }
 
         dashDir = moveInput; //Get the direction we were moving in
@@ -58,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (dashDir != Vector2.zero)
             {
+                sfx.PlaySound(0);
                 dashing = true;
                 stamina -= 1;
                 timeSinceLastStaminaUpdate = 0f;

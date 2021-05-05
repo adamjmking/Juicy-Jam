@@ -49,8 +49,6 @@ public class SpawnerManagerScript : MonoBehaviour
         remainder += (enemiesToSpawn * chipstackPct) - (int)(enemiesToSpawn * chipstackPct);
         int cardsToSpawn =(int) (enemiesToSpawn * cardPct + remainder);
 
-        Debug.Log("Spawning");
-
         if (spawnerList.Length > 0)
         {
             //reset Variables in Spawner

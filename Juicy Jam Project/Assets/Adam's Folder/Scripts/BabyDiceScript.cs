@@ -26,6 +26,9 @@ public class BabyDiceScript : MonoBehaviour
     int currentWaypoint = 0;
     bool reachedEndOfPath = false;
 
+    //Scripts
+    public SFXManager sfx;
+
     void Awake()
     {
         seeker = GetComponent<Seeker>();
@@ -35,6 +38,7 @@ public class BabyDiceScript : MonoBehaviour
 
     void Start()
     {
+        sfx = FindObjectOfType<SFXManager>();
         playerTrans = GameObject.Find("Player").GetComponent<Transform>();
         slotMachineTrans = GameObject.Find("Slotmachine").GetComponent<Transform>();
         target = playerTrans;
@@ -133,6 +137,7 @@ public class BabyDiceScript : MonoBehaviour
 
     void Attack()
     {
+        sfx.BabyDiceAttackSound();
         if (target == playerTrans)
         {
             PlayerHealthHandler playerHealth = playerTrans.GetComponent<PlayerHealthHandler>();

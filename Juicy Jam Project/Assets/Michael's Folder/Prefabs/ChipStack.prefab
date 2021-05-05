@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4993205940781888166}
   - component: {fileID: 4993205940781888161}
   - component: {fileID: 4993205940781888160}
+  - component: {fileID: 8575514234289223661}
   m_Layer: 6
   m_Name: ChipStack
   m_TagString: Enemy
@@ -100,7 +101,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -121,10 +122,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seekedDistanceToTarget: 5
-  chipSpeed: 1
+  speed: 200
+  nextWayPointDistance: 3
+  playerChaseDistance: 16
   shootCooldown: 1
   coolDownUntilStartShooting: 1
-  projectileSpeed: 15
+  projectileSpeed: 5
   chipProjectile: {fileID: 4604527293293137813, guid: 4951867adc53a3246b79229ebee15fff, type: 3}
 --- !u!95 &4993205940781888166
 Animator:
@@ -158,6 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  knockbackForce: 20
 --- !u!58 &4993205940781888160
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -174,3 +178,31 @@ CircleCollider2D:
   m_Offset: {x: 0.017839432, y: 0}
   serializedVersion: 2
   m_Radius: 0.99824715
+--- !u!114 &8575514234289223661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4993205940781888187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1

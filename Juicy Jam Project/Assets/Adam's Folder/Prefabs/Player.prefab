@@ -76,12 +76,12 @@ SpriteRenderer:
   m_SortingLayerID: 1911982495
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fd8ede61f4ed5cb4c80696025d21d6aa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b968e764dc377b243a537fb5be2d82b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3.71, y: 4.39}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -127,7 +127,12 @@ MonoBehaviour:
   timeSinceLastStaminaUpdate: 0
   restTime: 1.5
   stamina: 3
+  maxStamina: 3
   dashing: 0
+  ableToMove: 0
+  spawnpoint: {x: 0, y: 0, z: 0}
+  moving: 0
+  sfx: {fileID: 0}
 --- !u!114 &2301445167371231888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,8 +145,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb074b6166bd2814da25b3e6b4725bdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ableToAttack: 0
   attackCooldown: 0.25
   attackHitbox: {fileID: 5901971689077506679, guid: 76be8c975d1889c4797def4687f238e9, type: 3}
+  club: {fileID: 0}
+  clubPivot: {fileID: 0}
+  sfx: {fileID: 0}
 --- !u!114 &4487516541623987333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,6 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  sfx: {fileID: 0}
 --- !u!70 &3175545247926432053
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -168,6 +178,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.71, y: 3.5}
+  m_Offset: {x: -0.15467131, y: 0.21653974}
+  m_Size: {x: 1.091315, y: 2.5719726}
   m_Direction: 0

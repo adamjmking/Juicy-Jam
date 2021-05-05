@@ -12,11 +12,16 @@ public class PlayerAttack : MonoBehaviour
     //GameObjects
     public GameObject attackHitbox, club, clubPivot;
 
+    //Scripts
+    public SFXManager sfx;
+
     // Start is called before the first frame update
     void Start()
     {
         attacking = false;
         ableToAttack = true;
+        sfx = FindObjectOfType<SFXManager>();
+        sfx.PlaySound(0);
 
         club.SetActive(false);
     }
@@ -26,6 +31,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1") && !attacking && ableToAttack)
         {
+            sfx.PlayAttackSound();
             //create Hitbox
             attacking = true;
             Vector2 vectorToMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;

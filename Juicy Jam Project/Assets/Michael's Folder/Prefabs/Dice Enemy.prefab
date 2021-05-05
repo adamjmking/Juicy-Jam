@@ -140,7 +140,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67eac4cf57e553841b55bb83914e8227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
+  health: 40
+  knockbackForce: 20
+  sfx: {fileID: 0}
 --- !u!60 &7437307531228406578
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -215,7 +217,11 @@ MonoBehaviour:
   speed: 400
   nextWayPointDistance: 1
   playerChaseDistance: 40
+  attackDistance: 4
+  attackCoolDown: 1.5
+  ableToAttack: 1
   babyDice: {fileID: 1111547662245835476, guid: 1f6cf19d7baf3cf4a9432759011ce35a, type: 3}
+  sfx: {fileID: 0}
 --- !u!114 &854789136136785998
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,6 +18,7 @@ public class AttackHitboxBehavior : MonoBehaviour
     //GameObjects
     private GameObject player;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +32,7 @@ public class AttackHitboxBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         //set position
         attackHitboxTransform.position = player.transform.position + relativePosToPlayer;
 
@@ -47,6 +49,14 @@ public class AttackHitboxBehavior : MonoBehaviour
                     HitEnemies.Add(enemy.gameObject.GetInstanceID());
                     enemy.GetComponent<EnemyHealthHandler>().healthSystem.Damage(attackDamage * Powerups.damageMult);
                     enemy.GetComponent<EnemyHealthHandler>().Knockback(gameObject);
+                }
+            }
+            if (enemy.attachedRigidbody != null && enemy.attachedRigidbody.gameObject.tag.Equals("Projectile"))
+            {
+                if (!HitEnemies.Contains(enemy.gameObject.GetInstanceID()))
+                {
+                    HitEnemies.Add(enemy.gameObject.GetInstanceID());
+                    enemy.GetComponent<ChipProjectileBehavior>().Knockback(gameObject);
                 }
             }
         }

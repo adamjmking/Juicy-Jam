@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 130606702877844686}
   - component: {fileID: -5691461540163350707}
   - component: {fileID: 7327405168527371}
-  - component: {fileID: 290614288}
   - component: {fileID: 3129498169118358002}
+  - component: {fileID: 8896946219681202146}
   m_Layer: 6
   m_Name: BabyDice
   m_TagString: Enemy
@@ -124,6 +124,10 @@ MonoBehaviour:
   speed: 200
   nextWayPointDistance: 3
   playerChaseDistance: 16
+  attackDistance: 3
+  attackCoolDown: 1.5
+  ableToAttack: 1
+  sfx: {fileID: 0}
 --- !u!114 &-5691461540163350707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,8 +175,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!60 &290614288
-PolygonCollider2D:
+--- !u!114 &3129498169118358002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111547662245835476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67eac4cf57e553841b55bb83914e8227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 10
+  knockbackForce: 20
+  sfx: {fileID: 0}
+--- !u!61 &8896946219681202146
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -194,34 +213,6 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.55, y: 0.36499998}
-      - {x: -0.69, y: 0.155}
-      - {x: -0.69, y: 0.044999998}
-      - {x: -0.65999997, y: -0.024999999}
-      - {x: -0.56, y: 0.044999998}
-      - {x: -0.59999996, y: 0.105}
-      - {x: -0.62, y: 0.095}
-      - {x: -0.61, y: 0.114999995}
-      - {x: -0.57, y: 0.085}
-      - {x: -0.51, y: -0.015}
-      - {x: -0.5, y: -0.435}
-      - {x: -0.48, y: -0.465}
-      - {x: 0.21, y: -0.465}
-      - {x: 0.35, y: -0.45499998}
-      - {x: 0.59999996, y: -0.285}
-      - {x: 0.59999996, y: 0.36499998}
---- !u!114 &3129498169118358002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1111547662245835476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67eac4cf57e553841b55bb83914e8227, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 0
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1.29}
+  m_EdgeRadius: 0

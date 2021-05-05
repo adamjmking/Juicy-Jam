@@ -13,13 +13,18 @@ public class EnemyHealthHandler : MonoBehaviour
     Rigidbody2D rb;
     public float knockbackForce = 20f;
 
+    //Scripts
+    public SFXManager sfx;
+
     // Start is called before the first frame update
     void Start()
     {
         healthSystem = new HealthSystem(health);
         healthSystem.OnHealthChanged += HealthChanged;
+        healthSystem.OnDamageTaken += DamageTaken;
         healthSystem.SetMaxHealth(100 + Powerups.enemyExtraHealth);
         healthSystem.SetHealth(100 + Powerups.enemyExtraHealth);
+        sfx = FindObjectOfType<SFXManager>();
 
         rb = GetComponent<Rigidbody2D>();
     }
@@ -30,6 +35,26 @@ public class EnemyHealthHandler : MonoBehaviour
 
     }
 
+    private void DamageTaken(object sender, EventArgs args)
+    {
+        if (healthSystem.GetHealth() <= 0) return;
+        switch (gameObject.name)
+        {
+            case "ChipStack(Clone)":
+            case "ChipStack":
+                sfx.PlayChipHurtSound();
+                break;
+            case "Card Enemy(Clone)":
+            case "Card Enemy":
+                sfx.PlayCardHurtSound();
+                break;
+            case "Dice Enemy(Clone)":
+            case "Dice Enemy":
+                sfx.PlayDiceHurtSound();
+                break;
+        }
+    }
+
     private void HealthChanged(object sender, EventArgs args)
     {
         if (healthSystem.GetHealth() <= 0) Die();
@@ -37,6 +62,24 @@ public class EnemyHealthHandler : MonoBehaviour
 
     private void Die()
     {
+        switch (gameObject.name)
+        {
+            case "ChipStack(Clone)":
+            case "ChipStack":
+                sfx.PlayChipDeathSound();
+                break;
+            case "Card Enemy(Clone)":
+            case "Card Enemy":
+                sfx.PlayCardDeathSound();
+                break;
+            case "Dice Enemy(Clone)":
+            case "Dice Enemy":
+                sfx.PlayDiceDeathSound();
+                break;
+            case "BabyDice(Clone)":
+                sfx.PlayBabyDiceDeathSound();
+                break;
+        }
         Destroy(gameObject);
     }
 

@@ -51,10 +51,6 @@ public class SpawnerScript : MonoBehaviour
         {
             Instantiate(chipstack, GetRandomPosInSpawnArea(), spawnerTransform.rotation);
         }
-        /*
-        Debug.Log(DiceToSpawn + " Dice spawned");
-        Debug.Log(CardsToSpawn + " Cards spawned");
-        Debug.Log(ChipstacksToSpawn + " Chipstacks spawned");*/
     }
 
     private void OnDrawGizmosSelected()

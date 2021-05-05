@@ -11,7 +11,7 @@ public class HealthSystem
 
     //Events
     public event EventHandler OnHealthChanged;
-
+    public event EventHandler OnDamageTaken;
 
     public HealthSystem(float maxHealth)
     {
@@ -30,6 +30,11 @@ public class HealthSystem
         health -= damageAmount;
         if (health < 0) health = 0;
         OnHealthChanged(this, EventArgs.Empty);
+        try
+        {
+            OnDamageTaken(this, EventArgs.Empty);
+        }
+        catch (Exception e) { }
     }
 
     public void Heal(float healAmount)

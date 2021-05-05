@@ -1066,7 +1066,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2858355930838729055, guid: 1d5f4bb8c3bc86d4d928ff4b9dafb51b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.0409837
+      value: -2.1111112
       objectReference: {fileID: 0}
     - target: {fileID: 2858355930838729055, guid: 1d5f4bb8c3bc86d4d928ff4b9dafb51b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1401,6 +1401,7 @@ MonoBehaviour:
   coinCount: 0
   shootCooldown: 2
   coin: {fileID: 6017016828143737151, guid: 4d7493a3dfefeee4e8ac8bc362cecb3a, type: 3}
+  sfx: {fileID: 0}
 --- !u!1 &1968335582 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4416096919237726717, guid: 3f17e9eaf7b238644bf6b3106714cc0c, type: 3}
@@ -1542,6 +1543,18 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 57fadc8b63cd55b4980efcb03b3f43d1, type: 3}
   - {fileID: 8300000, guid: d53cfd3e0cc0de447abfb4bd751bfa79, type: 3}
   - {fileID: 8300000, guid: a1bb56e70524a7944b4b15c6eec1c1b2, type: 3}
+  attackSfxList: []
+  incapacitatedSfxList: []
+  damageTakenSfxList: []
+  slotmachineDamageTakenSfxList: []
+  chipDeathSfxList: []
+  chipHurtSfxList: []
+  cardDeathSfxList: []
+  cardHurtSfxList: []
+  babyDiceDeathSfxList: []
+  babyDiceHurtSfxList: []
+  diceDeathSfxList: []
+  diceHurtSfxList: []
 --- !u!4 &1983872335
 Transform:
   m_ObjectHideFlags: 0

@@ -14,13 +14,18 @@ public class PlayerHealthHandler : MonoBehaviour
     PlayerAttack playerAttack;
     PlayerMovement playerMovement;
 
+    //Scripts
+    public SFXManager sfx;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
         playerAttack = GetComponent<PlayerAttack>();
         playerMovement = GetComponent<PlayerMovement>();
         healthSystem = new HealthSystem(health);
-        healthSystem.OnHealthChanged += HealthChanged; 
+        healthSystem.OnHealthChanged += HealthChanged;
+        healthSystem.OnDamageTaken += DamageTaken;
+        sfx = FindObjectOfType<SFXManager>();
     }
 
     // Start is called before the first frame update
@@ -34,6 +39,11 @@ public class PlayerHealthHandler : MonoBehaviour
         
     }
 
+    private void DamageTaken(object sender, EventArgs args)
+    {
+        sfx.PlayDamageTakenSound();
+    }
+
     private void HealthChanged(object sender, EventArgs args)
     {
         if (healthSystem.GetHealth() <= 0) Stunned();
@@ -42,6 +52,7 @@ public class PlayerHealthHandler : MonoBehaviour
 
     private void Stunned()
     {
+        sfx.PlayIncapactitatedSound();
         animator.SetBool("Stunned", true);
         playerMovement.ableToMove = false;
         playerAttack.ableToAttack = false;
@@ -55,7 +66,7 @@ public class PlayerHealthHandler : MonoBehaviour
         playerMovement.ableToMove = true;
         playerAttack.ableToAttack = true;
         animator.SetBool("Stunned", false);
-        float healthHealed = healthSystem.GetMaxHealth() * 0.15f;
+        float healthHealed = healthSystem.GetMaxHealth() * 0.10f;
         healthSystem.Heal(healthHealed);
         GameObject.Find("UICanvas").GetComponent<HealthbarScript>().HealthChanged();
     }

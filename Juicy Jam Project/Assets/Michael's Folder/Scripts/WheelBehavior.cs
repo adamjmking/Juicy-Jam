@@ -67,6 +67,7 @@ public class WheelBehavior : MonoBehaviour
 
     private void FixedUpdate()
     {
+        GameObject.Find("UICanvas").GetComponentInChildren<Text>().text = "Waves Survived: " + StaticVariables.survivedRounds;
         if (isSpun && wheelRigidbody.angularVelocity > 5)
         {
             wheelRigidbody.AddTorque(-10);
@@ -98,6 +99,7 @@ public class WheelBehavior : MonoBehaviour
         {
             if (!canvas.enabled)
             {
+                sfx.PlayRoundWonSound();
                 canvas.enabled = true;
                 wheelParent.SetActive(true);
                 buttonList.SetActive(false);
@@ -163,7 +165,20 @@ public class WheelBehavior : MonoBehaviour
         spawnerManager.IncreaseEnemies();
 
         spinButtonPressed = false;
+
         Unpause();
+
+        StaticVariables.survivedRounds++;
+
+        HealthSystem playerHealth = FindObjectOfType<PlayerHealthHandler>().healthSystem;
+        if(playerHealth.GetHealth() < (playerHealth.GetMaxHealth() / 2))
+        {
+            playerHealth.SetHealth(playerHealth.GetMaxHealth() / 2);
+        }
+
+        HealthSystem slotmachineHealth = FindObjectOfType<SlotmachineHealthHandler>().healthSystem;
+        slotmachineHealth.SetHealth(slotmachineHealth.GetMaxHealth());
+
     }
 
     private void SetButtonText()

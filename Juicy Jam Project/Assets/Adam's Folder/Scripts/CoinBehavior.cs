@@ -20,7 +20,6 @@ public class CoinBehavior : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.collider.name);
         if (collision.collider.CompareTag("Enemy"))
         {
             collision.collider.GetComponent<EnemyHealthHandler>().healthSystem.Damage(coinDamage);

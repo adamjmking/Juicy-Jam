@@ -26,6 +26,9 @@ public class CardScript : MonoBehaviour
     int currentWaypoint = 0;
     bool reachedEndOfPath = false;
 
+    //Scripts
+    public SFXManager sfx;
+
     void Awake()
     {
         seeker = GetComponent<Seeker>();
@@ -38,6 +41,7 @@ public class CardScript : MonoBehaviour
         playerTrans = GameObject.Find("Player").GetComponent<Transform>();
         slotMachineTrans = GameObject.Find("Slotmachine").GetComponent<Transform>();
         target = playerTrans;
+        sfx = FindObjectOfType<SFXManager>();
 
         InvokeRepeating("UpdatePath", 0f, 0.5f);
     }
@@ -129,6 +133,7 @@ public class CardScript : MonoBehaviour
 
     void Attack()
     {
+        sfx.PlaySound(8);
         if (target == playerTrans)
         {
             PlayerHealthHandler playerHealth = playerTrans.GetComponent<PlayerHealthHandler>();

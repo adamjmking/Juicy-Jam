@@ -12,10 +12,13 @@ public class ShootCoinScript : MonoBehaviour
     //Gameobject
     public GameObject coin;
 
+    //Scripts
+    public SFXManager sfx;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        sfx = FindObjectOfType<SFXManager>();
     }
 
     // Update is called once per frame
@@ -35,12 +38,15 @@ public class ShootCoinScript : MonoBehaviour
     {
         for (int i = 1; i <= coinCount; i++)
         {
+            Debug.Log("shot");
+            sfx.PlaySound(6);
             Instantiate(coin, transform.position, Quaternion.Euler(0f, 0f, Random.Range(1,360)));
         }
     }
 
     public void UpdateCoinCount(int extraCoin)
     {
+        Debug.Log("called");
         coinCount += extraCoin;
     }
 }

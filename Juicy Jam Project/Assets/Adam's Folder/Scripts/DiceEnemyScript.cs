@@ -20,19 +20,16 @@ public class DiceEnemyScript : MonoBehaviour
     public float attackCoolDown = 1.5f;
     public bool ableToAttack = true;
 
-    //Pathfinding
-    Path path;
-    Seeker seeker;
-    int currentWaypoint = 0;
-    bool reachedEndOfPath = false;
-
     public GameObject babyDice;
+
+    //Scripts
+    public SFXManager sfx;
 
     void Awake()
     {
-        seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        sfx = FindObjectOfType<SFXManager>();
     }
 
     void Start()
@@ -42,25 +39,16 @@ public class DiceEnemyScript : MonoBehaviour
         target = playerTrans;
 
         InvokeRepeating("UpdatePath", 0f, 0.5f);
-        SpawnBabies(1 + Powerups.extaDiceSummon);
+        InvokeRepeating(nameof(InvokeSpawnBabies), 0, 5);
+        
     }
 
-    void OnPathComplete(Path p)
+    void InvokeSpawnBabies()
     {
-        if (!p.error)
-        {
-            path = p;
-            currentWaypoint = 0;
-        }
+        animator.SetBool("Summon", true);
+        Invoke(nameof(SpawnBabies), 1);
     }
 
-    void UpdatePath()
-    {
-        if (seeker.IsDone())
-        {
-            seeker.StartPath(rb.position, target.position, OnPathComplete);
-        }
-    }
 
     void UpdateTarget()
     {
@@ -87,51 +75,22 @@ public class DiceEnemyScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (path == null) return;
-
-        if (currentWaypoint >= path.vectorPath.Count)
-        {
-            reachedEndOfPath = true;
-            return;
-        }
-        else
-        {
-            reachedEndOfPath = false;
-        }
-
-        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-        Vector2 force = direction * speed * Time.deltaTime;
-        rb.AddForce(force);
-
-        float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
-        if (distance < nextWayPointDistance)
-        {
-            currentWaypoint++;
-        }
-
-        //Update sprites
-        if (rb.velocity.x >= 0.01f)
-        {
-            animator.SetBool("Facing Right", true);
-        }
-        else if (rb.velocity.x <= -0.01f)
-        {
-            animator.SetBool("Facing Right", false);
-        }
-        else
-        {
-            animator.SetBool("Facing Right", false);
-        }
-
-        UpdateTarget();
     }
-
-    void SpawnBabies(int spawnNumber)
+    
+    void SpawnBabies()
     {
-        for (int i=0; i < spawnNumber; i++)
+        sfx.PlaySound(7);
+        for (int i=0; i < Powerups.extaDiceSummon + 1; i++)
         {
             Instantiate(babyDice, (Vector2)transform.position + Random.insideUnitCircle * 2, Quaternion.identity);
         }
+        Invoke(nameof(SetIdle), 1);
+    }
+
+    void SetIdle()
+    {
+
+        animator.SetBool("Summon", false);
     }
     void ResetAttack()
     {
